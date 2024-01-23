@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { deleteInvoice } from '@/app/lib/actions';
 
 
-export function CreateInvoice() {
+export function CreateInvoice({id} : {id : string}) {
   return (
     <Link
     href={`/dashboard/invoices/${id}/edit`}

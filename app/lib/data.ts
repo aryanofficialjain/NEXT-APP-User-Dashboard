@@ -167,6 +167,8 @@ export async function fetchInvoicesPages(query: string) {
 
 export async function fetchInvoiceById(id: string) {
   try {
+    console.log('Fetching invoice with ID:', id);
+
     const data = await sql<InvoiceForm>`
       SELECT
         invoices.id,
@@ -183,13 +185,14 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
+    console.log('Fetched invoice:', invoice);
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoice.');
+    // Log the ID to help identify which invoice caused the error
+    console.error('Failed to fetch invoice with ID:', id);
+    // throw new Error('Failed to fetch invoice.');
   }
-
-  noStore();
 }
 
 
@@ -262,3 +265,5 @@ export async function getUser(email: string) {
   }
   noStore();
 }
+
+
